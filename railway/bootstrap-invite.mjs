@@ -45,8 +45,10 @@ async function main() {
     log("server did not become healthy in time; skipping first-admin invite.");
     return;
   }
-  if (health.deploymentMode !== "authenticated" || health.bootstrapStatus !== "bootstrap_pending") {
-    return; // admin already exists (or local_trusted mode): nothing to do
+  if (health.deploymentMode !== "authenticated") return; // local_trusted: no invite concept
+  if (health.bootstrapStatus !== "bootstrap_pending") {
+    log("instance already has an admin; no invite needed");
+    return;
   }
 
   const require = createRequire("/app/packages/db/package.json");
