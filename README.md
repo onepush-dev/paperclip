@@ -1,7 +1,6 @@
 # Paperclip — open-source AI agent orchestration (official image + Postgres). Deploy on Railway with one click.
 
-<!-- Deploy button: replace DEPLOY_CODE once the Railway template is generated -->
-[![Deploy on Railway](https://railway.com/button.svg)](https://railway.com/deploy/DEPLOY_CODE)
+[![Deploy on Railway](https://railway.com/button.svg)](https://railway.com/deploy/MC8ZVm)
 
 [Paperclip](https://paperclip.ing) runs a company of AI agents: an org chart, goals, issues, budgets and heartbeats, with built-in adapters for Claude Code, Codex, OpenCode and Gemini CLI. This template ships the **official** `ghcr.io/paperclipai/paperclip` image, digest-pinned, on **Railway Postgres** with a persistent volume, in **authenticated + public** mode, and needs **no deploy-time input**.
 
@@ -60,6 +59,7 @@
 Health (no auth): `GET https://<your-domain>/api/health` returns `200` `{"status":"ok",…}`.
 
 ## Notes
+- Template editor (unpublished): https://railway.com/workspace/templates/ad65b88a-6bf8-4066-988e-c660fa2dc92d
 - Run **one replica**: agent workspaces and the secrets key live on the `/paperclip` volume.
 - The invite helper (`railway/bootstrap-invite.mjs`, minified in `bootstrap-invite.min.mjs`) waits for `/api/health`. If the instance still reports `bootstrap_pending`, it revokes older pending bootstrap invites and inserts a new `bootstrap_ceo` invite, the same way upstream `paperclipai auth bootstrap-ceo` does (sha256 token hash, human-only, 72h). Once an admin exists it only logs `instance already has an admin`. If an invite expires before anyone claims it, restart the service to get a new one.
 - Back up Postgres from Railway. Company exports are documented upstream.
